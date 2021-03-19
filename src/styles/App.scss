@@ -3,6 +3,7 @@ $phoneDetails: #d3d3d3;
 $phoneColor: #dfdfdf;
 $phoneWidth: 320px;
 $phoneHeight: 560px;
+$buttonBg: #ddd;
 
 #phone {
   width: $phoneWidth;
@@ -103,6 +104,79 @@ $phoneHeight: 560px;
       height: 100%;
       background: #4d4;
       border: 1px solid transparent;
+    }
+  }
+}
+
+#people {
+  .person-photo {
+    .person-photo-inner {
+      margin: 0 auto;
+      width: 90%;
+      text-align: center;
+      position: relative;
+      border-radius: 5px;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 255px;
+      }
+      .person-info {
+        text-align: left;
+        padding: 10px;
+        width: calc(100% - 22px);
+        border: 1px solid $phoneDetails;
+        border-radius: 0 0 5px 5px;
+        border-top: none;
+        background-color: #fff;
+        position: absolute;
+        bottom: 0;
+      }
+    }
+  }
+}
+// swipe animation
+.dislike-animation {
+  transition: transform 0.5s;
+  transform: translateX(-30rem) rotate(-30deg) !important;
+}
+.like-animation {
+  transition: transform 0.5s;
+  transform: translateX(30rem) rotate(30deg) !important;
+}
+
+#control {
+  width: 90%;
+  margin: 30px auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+
+  .button {
+    background-color: $buttonBg;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:nth-child(2) {
+      width: 40px;
+      height: 40px;
+    }
+
+    .imcross {
+      color: #c33;
+      font-size: 1.5rem;
+    }
+    .bsinfocirclefill {
+      color: #3498db;
+    }
+    .aifillheart {
+      color: #3b7;
+      font-size: 1.8rem;
     }
   }
 }
