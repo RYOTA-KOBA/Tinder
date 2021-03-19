@@ -1,17 +1,32 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import '../styles/App.scss'
-// import data from '../data.json'
+import data from '../data.json'
 import { ImCross } from 'react-icons/im'
 import { BsInfoCircleFill } from 'react-icons/bs'
 import { AiFillHeart } from 'react-icons/ai'
+import Card from './Card'
+
+type data = {
+  id: number
+  name: string
+  age: number
+  img: string
+}
 
 const App: React.FC = () => {
-  // const [people, setPeople] = useState(data)
   const [activeNo, setActiveNo] = useState(false)
   const [activeLike, setActiveLike] = useState(false)
+  const [users, setUsers] = useState<data[]>([])
+  const [currentIndex, setCurrentIndex] = useState(0)
+
+  const nextUser = () => {
+    const nextIndex = users.length - 2 === currentIndex ? 0 : currentIndex + 1
+    setCurrentIndex(nextIndex)
+  }
 
   const handleNo = () => {
     setActiveNo(true)
+    nextUser()
     if (activeNo) {
       document
         .querySelector('.person-photo')
@@ -20,10 +35,15 @@ const App: React.FC = () => {
   }
   const handleLike = () => {
     setActiveLike(true)
+    nextUser()
     if (activeLike) {
       document.querySelector('.person-photo')?.classList.add('like-animation')
     }
   }
+
+  useEffect(() => {
+    setUsers(data)
+  }, [])
 
   return (
     <div id="phone">
@@ -47,16 +67,7 @@ const App: React.FC = () => {
             </span>
           </div>
         </div>
-        <div id="people">
-          <div className="person-photo">
-            <div className="person-photo-inner">
-              <img src="https://i.imgur.com/QZuGC10.jpg" alt="" />
-              <div className="person-info">
-                <strong>Linda</strong>, 25
-              </div>
-            </div>
-          </div>
-        </div>
+        <div id="people">{users.length !== 0 && <Card users={users} />}</div>
         <div id="control">
           <div className="button no">
             <a href="#" className="trigger" onClick={handleNo}>
