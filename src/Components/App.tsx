@@ -4,7 +4,7 @@ import data from '../data.json'
 import { ImCross } from 'react-icons/im'
 import { BsInfoCircleFill } from 'react-icons/bs'
 import { AiFillHeart } from 'react-icons/ai'
-import Card from './Card'
+import TinderCards from './TinderCards'
 
 type data = {
   id: number
@@ -67,7 +67,10 @@ const App: React.FC = () => {
             </span>
           </div>
         </div>
-        <div id="people">{users.length !== 0 && <Card users={users} />}</div>
+        <div id="people">
+          {users.length !== 0 && <TinderCards users={users} />}
+          <h1 style={{ textAlign: 'center' }}>Empty!!</h1>
+        </div>
         <div id="control">
           <div className="button no">
             <a href="#" className="trigger" onClick={handleNo}>
