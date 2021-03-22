@@ -167,6 +167,7 @@ $dislikeColor: rgb(255, 22, 22);
     top: 10%;
     left: 10%;
     z-index: 100;
+    font-weight: 600;
   }
 }
 @keyframes dislike {
@@ -194,6 +195,7 @@ $dislikeColor: rgb(255, 22, 22);
     top: 10%;
     right: 10%;
     z-index: 100;
+    font-weight: 600;
   }
 }
 @keyframes like {
