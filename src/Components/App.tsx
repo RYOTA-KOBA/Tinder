@@ -18,28 +18,37 @@ const App: React.FC = () => {
   const [activeLike, setActiveLike] = useState(false)
   const [users, setUsers] = useState<data[]>([])
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [currentId, setCurrentId] = useState(data.length)
+  // const [loading, setLoading] = useState(false)
+  // const removedCard = [];
 
   const nextUser = () => {
     const nextIndex = users.length - 2 === currentIndex ? 0 : currentIndex + 1
     setCurrentIndex(nextIndex)
   }
 
-  const handleNo = () => {
+  const handleNo = (id: number) => {
+    // setLoading(true)
     setActiveNo(true)
+    setCurrentId(currentId - 1)
     nextUser()
     if (activeNo) {
-      document
-        .querySelector('.person-photo')
-        ?.classList.add('dislike-animation')
+      document.querySelector(`#user-${id}`)?.classList.add('dislike-animation')
+      // setLoading(false)
     }
   }
-  const handleLike = () => {
+  const handleLike = (id: number) => {
+    // setLoading(true)
     setActiveLike(true)
+    setCurrentId(currentId - 1)
     nextUser()
     if (activeLike) {
-      document.querySelector('.person-photo')?.classList.add('like-animation')
+      document.querySelector(`#user-${id}`)?.classList.add('like-animation')
+      // setLoading(false)
     }
   }
+
+  // console.log(loading)
 
   useEffect(() => {
     setUsers(data)
@@ -73,19 +82,27 @@ const App: React.FC = () => {
         </div>
         <div id="control">
           <div className="button no">
-            <a href="#" className="trigger" onClick={handleNo}>
+            <button
+              className="trigger"
+              onClick={() => handleNo(currentId)}
+              // disabled={loading ? true : false}
+            >
               <ImCross className="imcross" />
-            </a>
+            </button>
           </div>
           <div className="button info">
-            <a href="#" className="trigger">
+            <a className="trigger">
               <BsInfoCircleFill className="bsinfocirclefill" />
             </a>
           </div>
           <div className="button yes">
-            <a href="#" className="trigger" onClick={handleLike}>
+            <button
+              className="trigger"
+              onClick={() => handleLike(currentId)}
+              // disabled={loading ? true : false}
+            >
               <AiFillHeart className="aifillheart" />
-            </a>
+            </button>
           </div>
         </div>
       </div>
