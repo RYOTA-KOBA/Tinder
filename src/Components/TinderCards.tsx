@@ -16,7 +16,7 @@ const TinderCards: React.FC<Props> = (props) => {
   return (
     <div className="card-container">
       {props.users.map((user: data) => (
-        <div className="person-photo" key={user.id}>
+        <div className="person-photo" id={`user-${user.id}`} key={user.id}>
           <TinderCard preventSwipe={['up', 'down']}>
             <div className="person-photo-inner">
               <img src={user.img} alt="" />
