@@ -14,11 +14,9 @@ type data = {
 }
 
 const App: React.FC = () => {
-  const [activeNo, setActiveNo] = useState(false)
-  const [activeLike, setActiveLike] = useState(false)
   const [users, setUsers] = useState<data[]>([])
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [currentId, setCurrentId] = useState(data.length)
+  const [currentId, setCurrentId] = useState(data.length - 1)
   // const [loading, setLoading] = useState(false)
   // const removedCard = [];
 
@@ -29,23 +27,19 @@ const App: React.FC = () => {
 
   const handleNo = (id: number) => {
     // setLoading(true)
-    setActiveNo(true)
-    setCurrentId(currentId - 1)
     nextUser()
-    if (activeNo) {
-      document.querySelector(`#user-${id}`)?.classList.add('dislike-animation')
-      // setLoading(false)
-    }
+    setCurrentId(currentId - 1)
+    console.log(currentId)
+    document.querySelector(`#user-${id}`)?.classList.add('dislike-animation')
+    // setLoading(false)
   }
   const handleLike = (id: number) => {
     // setLoading(true)
-    setActiveLike(true)
-    setCurrentId(currentId - 1)
     nextUser()
-    if (activeLike) {
-      document.querySelector(`#user-${id}`)?.classList.add('like-animation')
-      // setLoading(false)
-    }
+    setCurrentId(currentId - 1)
+    console.log(currentId)
+    document.querySelector(`#user-${id}`)?.classList.add('like-animation')
+    // setLoading(false)
   }
 
   // console.log(loading)
@@ -78,14 +72,16 @@ const App: React.FC = () => {
         </div>
         <div id="people">
           {users.length !== 0 && <TinderCards users={users} />}
-          <h1 style={{ textAlign: 'center' }}>Empty!!</h1>
+          <h3 style={{ textAlign: 'center', width: '80%', margin: 'auto' }}>
+            全てのユーザーを表示しました。さらに表示したい場合は時間を置いてから再びお試しください。
+          </h3>
         </div>
         <div id="control">
           <div className="button no">
             <button
               className="trigger"
               onClick={() => handleNo(currentId)}
-              // disabled={loading ? true : false}
+              disabled={currentId <= -1 ? true : false}
             >
               <ImCross className="imcross" />
             </button>
@@ -99,7 +95,7 @@ const App: React.FC = () => {
             <button
               className="trigger"
               onClick={() => handleLike(currentId)}
-              // disabled={loading ? true : false}
+              disabled={currentId <= -1 ? true : false}
             >
               <AiFillHeart className="aifillheart" />
             </button>
