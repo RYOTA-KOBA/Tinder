@@ -181,6 +181,10 @@ $buttonBg: #ddd;
     .trigger {
       background: #dddddd;
       border: none;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
       &:focus {
         outline: none;
       }
