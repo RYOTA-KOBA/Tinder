@@ -15,8 +15,8 @@ type data = {
 
 const App: React.FC = () => {
   const [users, setUsers] = useState<data[]>([])
-  const [currentId, setCurrentId] = useState(data.length - 1)
-  const [time, setTime] = useState('')
+  const [currentId, setCurrentId] = useState<number>(data.length - 1)
+  const [time, setTime] = useState<string>('')
 
   const displayTime = () => {
     const date = new Date()
