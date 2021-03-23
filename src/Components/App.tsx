@@ -15,40 +15,45 @@ type data = {
 
 const App: React.FC = () => {
   const [users, setUsers] = useState<data[]>([])
-  const [currentIndex, setCurrentIndex] = useState(0)
   const [currentId, setCurrentId] = useState(data.length - 1)
-  // const [loading, setLoading] = useState(false)
-  // const removedCard = [];
+  const [time, setTime] = useState('')
 
-  const nextUser = () => {
-    const nextIndex = users.length - 2 === currentIndex ? 0 : currentIndex + 1
-    setCurrentIndex(nextIndex)
+  const displayTime = () => {
+    const date = new Date()
+    const getHours = toDoubleDigits(date.getHours())
+    const getMunites = toDoubleDigits(date.getMinutes())
+    const display: string = `${getHours} : ${getMunites}`
+    setTime(display)
+  }
+
+  const toDoubleDigits = (num: any) => {
+    num += ''
+    if (num.length === 1) {
+      num = '0' + num
+    }
+    return num
   }
 
   const handleNo = (id: number) => {
-    // setLoading(true)
-    nextUser()
-    setCurrentId(currentId - 1)
+    handleSwipe()
     console.log(currentId)
     document.querySelector(`#user-${id}`)?.classList.add('dislike-animation')
-    // setLoading(false)
   }
   const handleLike = (id: number) => {
-    // setLoading(true)
-    nextUser()
-    setCurrentId(currentId - 1)
+    handleSwipe()
     console.log(currentId)
     document.querySelector(`#user-${id}`)?.classList.add('like-animation')
-    // setLoading(false)
   }
 
-  // const handleSwipe = () => {
-  //   setCurrentId(currentId - 1)
-  //   console.log(currentId)
-  // }
+  const handleSwipe = () => {
+    setCurrentId(currentId - 1)
+  }
 
   useEffect(() => {
     setUsers(data)
+    setInterval(() => {
+      displayTime()
+    }, 1000)
   }, [])
 
   return (
@@ -66,7 +71,7 @@ const App: React.FC = () => {
               </a>
               <span className="fontawesome-signal"></span>
             </span>
-            <span className="center clock"></span>
+            <span className="center clock">{time}</span>
             <span className="right">
               <span>75%</span>
               <div id="battery"></div>
@@ -74,13 +79,12 @@ const App: React.FC = () => {
             </span>
           </div>
         </div>
-        {console.log(currentId)}
         <div id="people">
           {users.length !== 0 && (
             <TinderCards
               users={users}
-              setCurrentId={setCurrentId}
               currentId={currentId}
+              setCurrentId={setCurrentId}
             />
           )}
           <h3 style={{ textAlign: 'center', width: '80%', margin: 'auto' }}>
