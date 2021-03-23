@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import '../styles/App.scss'
 import data from '../data.json'
 import { ImCross } from 'react-icons/im'
-import { BsInfoCircleFill } from 'react-icons/bs'
+import { BsInfoCircleFill, BsCircle, BsCircleFill } from 'react-icons/bs'
 import { AiFillHeart } from 'react-icons/ai'
 import TinderCards from './TinderCards'
 
@@ -42,7 +42,10 @@ const App: React.FC = () => {
     // setLoading(false)
   }
 
-  // console.log(loading)
+  // const handleSwipe = () => {
+  //   setCurrentId(currentId - 1)
+  //   console.log(currentId)
+  // }
 
   useEffect(() => {
     setUsers(data)
@@ -54,11 +57,12 @@ const App: React.FC = () => {
         <div className="header">
           <div className="top">
             <span className="left">
-              <span className="fontawesome-circle"></span>
-              <span className="fontawesome-circle"></span>
-              <span className="fontawesome-circle-blank"></span>
-              <a href="http://rena.to" target="_blank">
-                rena.to
+              <BsCircleFill />
+              <BsCircleFill />
+              <BsCircleFill />
+              <BsCircle />
+              <a href="#" target="_blank">
+                phone
               </a>
               <span className="fontawesome-signal"></span>
             </span>
@@ -70,8 +74,15 @@ const App: React.FC = () => {
             </span>
           </div>
         </div>
+        {console.log(currentId)}
         <div id="people">
-          {users.length !== 0 && <TinderCards users={users} />}
+          {users.length !== 0 && (
+            <TinderCards
+              users={users}
+              setCurrentId={setCurrentId}
+              currentId={currentId}
+            />
+          )}
           <h3 style={{ textAlign: 'center', width: '80%', margin: 'auto' }}>
             全てのユーザーを表示しました。さらに表示したい場合は時間を置いてから再びお試しください。
           </h3>
@@ -87,7 +98,7 @@ const App: React.FC = () => {
             </button>
           </div>
           <div className="button info">
-            <a className="trigger">
+            <a>
               <BsInfoCircleFill className="bsinfocirclefill" />
             </a>
           </div>
