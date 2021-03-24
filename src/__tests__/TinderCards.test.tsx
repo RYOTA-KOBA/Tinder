@@ -18,7 +18,6 @@ describe('TinderCardsのレンダリングテスト', () => {
         setCurrentId={() => setCurrentId}
       />,
     )
-
     expect(container.getElementsByClassName('card-container').length).toEqual(1)
   })
 })
