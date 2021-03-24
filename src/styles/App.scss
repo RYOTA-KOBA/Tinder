@@ -7,6 +7,10 @@ $buttonBg: #ddd;
 $likeColor: rgb(14, 185, 14);
 $dislikeColor: rgb(255, 22, 22);
 
+#root {
+  position: relative;
+}
+
 #phone {
   width: $phoneWidth;
   height: $phoneHeight;
@@ -119,10 +123,50 @@ $dislikeColor: rgb(255, 22, 22);
 
     .person-photo {
       width: 100%;
-      // box-shadow: 0px 18px 33px 0px rgba(0, 0, 0, 0.3);
       position: absolute;
 
       div {
+        .modal-info-hide {
+          display: none;
+        }
+        .modal-info {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          width: 40%;
+          height: 30%;
+          margin: auto;
+          background-color: $bg;
+          border-radius: 12px;
+          display: flex;
+          padding: 5px;
+          box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+
+          .modal-info-inner {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            width: 100%;
+            transition: transform 0s 0.5s;
+          }
+
+          .closeicon {
+            position: absolute;
+            top: 0;
+            &:hover {
+              cursor: pointer;
+            }
+          }
+
+          p {
+            margin: 0;
+            font-weight: 600;
+          }
+        }
         .person-photo-inner {
           margin: 0 auto;
           width: 90%;
@@ -145,6 +189,10 @@ $dislikeColor: rgb(255, 22, 22);
             background-color: #fff;
             position: absolute;
             bottom: 0;
+
+            &:hover {
+              cursor: pointer;
+            }
           }
         }
       }
